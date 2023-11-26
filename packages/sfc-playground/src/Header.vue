@@ -54,7 +54,7 @@ function toggleDark() {
   <nav>
     <h1>
       <img alt="logo" src="/logo.svg" />
-      <span>Vue SFC Playground</span>
+      <span>Wint SFC Playground</span>
     </h1>
     <div class="links">
       <VersionSelect
