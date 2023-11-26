@@ -27,10 +27,10 @@ async function setVueVersion(v: string) {
   vueVersion.value = `v${v}`
 }
 
-function resetVueVersion() {
-  store.resetVueVersion()
-  vueVersion.value = `@${currentCommit}`
-}
+// function resetVueVersion() {
+//   store.resetVueVersion()
+//   vueVersion.value = `@${currentCommit}`
+// }
 
 async function copyLink(e: MouseEvent) {
   if (e.metaKey) {
@@ -68,14 +68,14 @@ function toggleDark() {
         pkg="vue"
         label="Vue Version"
       >
-        <li>
+        <!-- <li>
           <a @click="resetVueVersion">This Commit ({{ currentCommit }})</a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
           <a href="https://app.netlify.com/sites/vue-sfc-playground/deploys" target="_blank"
             >Commits History</a
           >
-        </li>
+        </li> -->
       </VersionSelect>
       <button
         title="Toggle development production mode"
@@ -103,12 +103,7 @@ function toggleDark() {
       <button title="Download project files" class="download" @click="downloadProject(store)">
         <Download />
       </button>
-      <a
-        href="https://github.com/vuejs/core/tree/main/packages/sfc-playground"
-        target="_blank"
-        title="View on GitHub"
-        class="github"
-      >
+      <a href="https://lijiefeng.work/" target="_blank" title="View on Wint" class="github">
         <GitHub />
       </a>
     </div>

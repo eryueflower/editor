@@ -18,9 +18,7 @@ async function toggle() {
 }
 
 async function fetchVersions(): Promise<string[]> {
-  const res = await fetch(
-    `https://data.jsdelivr.com/v1/package/npm/${props.pkg}`
-  )
+  const res = await fetch(`https://data.jsdelivr.com/v1/package/npm/${props.pkg}`)
   const { versions } = (await res.json()) as { versions: string[] }
 
   if (props.pkg === 'vue') {
@@ -43,7 +41,7 @@ async function fetchVersions(): Promise<string[]> {
     }
     return filteredVersions
   } else if (props.pkg === 'typescript') {
-    return versions.filter(v => !v.includes('dev') && !v.includes('insiders'))
+    return versions.filter((v) => !v.includes('dev') && !v.includes('insiders'))
   }
   return versions
 }
@@ -74,7 +72,7 @@ onMounted(() => {
 
     <ul class="versions" :class="{ expanded }">
       <li v-if="!versions"><a>loading versions...</a></li>
-      <li v-for="version of versions">
+      <li v-for="version of versions" :key="version">
         <a @click="setVersion(version)">v{{ version }}</a>
       </li>
       <div @click="expanded = false">
