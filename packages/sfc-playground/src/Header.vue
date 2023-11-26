@@ -18,8 +18,8 @@ const emit = defineEmits(['toggle-theme', 'toggle-ssr', 'toggle-dev'])
 
 const { store } = props
 
-const currentCommit = __COMMIT__
-const vueVersion = ref(`@${currentCommit}`)
+// const currentCommit = __COMMIT__
+const vueVersion = ref(`v3.3.4`)
 
 async function setVueVersion(v: string) {
   vueVersion.value = `loading...`
