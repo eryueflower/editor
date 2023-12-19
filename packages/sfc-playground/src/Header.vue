@@ -32,6 +32,14 @@ async function setVueVersion(v: string) {
 //   vueVersion.value = `@${currentCommit}`
 // }
 
+const elPlusVersion = ref(`v2.4.4`)
+
+async function setElPlusVersion(v: string) {
+  elPlusVersion.value = `loading...`
+  // await store.setElPlusVersion(v)
+  elPlusVersion.value = `v${v}`
+}
+
 async function copyLink(e: MouseEvent) {
   if (e.metaKey) {
     // hidden logic for going to local debug from play.vuejs.org
@@ -77,6 +85,15 @@ function toggleDark() {
           >
         </li> -->
       </VersionSelect>
+
+      <VersionSelect
+        :model-value="elPlusVersion"
+        @update:model-value="setElPlusVersion"
+        pkg="element-plus"
+        label="Element-plus Version"
+      >
+      </VersionSelect>
+
       <button
         title="Toggle development production mode"
         class="toggle-dev"
