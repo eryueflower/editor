@@ -2,7 +2,7 @@
 import Header from './Header.vue'
 import { Repl, ReplStore, SFCOptions } from '@vue/repl'
 import Monaco from '@vue/repl/monaco-editor'
-import { ref, watchEffect, onMounted } from 'vue'
+import { ref, provide, watchEffect, onMounted } from 'vue'
 
 const setVH = () => {
   document.documentElement.style.setProperty('--vh', window.innerHeight + `px`)
@@ -85,6 +85,14 @@ onMounted(() => {
   const cls = document.documentElement.classList
   toggleTheme(cls.contains('dark'))
 })
+const previewOptions: any = ref({
+  headHTML: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@2.4.4/dist/index.css">`,
+  customCode: {
+    importCode: `import ElementPlus from 'element-plus'`,
+    useCode: `app.use(ElementPlus)`
+  }
+})
+provide('preview-options', previewOptions)
 </script>
 
 <template>
@@ -103,6 +111,7 @@ onMounted(() => {
     @keydown.meta.s.prevent
     :ssr="useSSRMode"
     :store="store"
+    :previewOptions="previewOptions"
     :showCompileOutput="true"
     :autoResize="true"
     :sfcOptions="sfcOptions"

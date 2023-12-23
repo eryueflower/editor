@@ -17,7 +17,7 @@ const props = defineProps<{
 const emit = defineEmits(['toggle-theme', 'toggle-ssr', 'toggle-dev'])
 
 const { store } = props
-const previewOptions = inject('preview-options')
+const previewOptions: any = inject('preview-options')
 // const currentCommit = __COMMIT__
 const vueVersion = ref(`v3.3.4`)
 
