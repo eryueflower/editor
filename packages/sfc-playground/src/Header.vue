@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { downloadProject } from './download/download'
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 import Sun from './icons/Sun.vue'
 import Moon from './icons/Moon.vue'
 import Share from './icons/Share.vue'
@@ -17,7 +17,7 @@ const props = defineProps<{
 const emit = defineEmits(['toggle-theme', 'toggle-ssr', 'toggle-dev'])
 
 const { store } = props
-
+const previewOptions = inject('preview-options')
 // const currentCommit = __COMMIT__
 const vueVersion = ref(`v3.3.4`)
 
@@ -43,11 +43,18 @@ const createImportMap: any = (version: String) => {
 
 const elPlusVersion = ref(`v2.4.4`)
 
-async function setElPlusVersion(v: string) {
-  const importMap = createImportMap(v)
+function initElementPlus(version: string) {
+  const importMap = createImportMap(version)
+  store.setImportMap(importMap)
+}
+
+async function setElPlusVersion(version: string) {
+  const importMap = createImportMap(version)
   elPlusVersion.value = `loading...`
   await store.setImportMap(importMap)
-  elPlusVersion.value = `v${v}`
+  console.log(previewOptions.value)
+  previewOptions.value.headHTML = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@${version}/dist/index.css">`
+  elPlusVersion.value = `v${version}`
 }
 
 async function copyLink(e: MouseEvent) {
@@ -66,6 +73,8 @@ function toggleDark() {
   localStorage.setItem('vue-sfc-playground-prefer-dark', String(cls.contains('dark')))
   emit('toggle-theme', cls.contains('dark'))
 }
+
+initElementPlus(elPlusVersion.value.slice(1))
 </script>
 
 <template>
