@@ -32,11 +32,21 @@ async function setVueVersion(v: string) {
 //   vueVersion.value = `@${currentCommit}`
 // }
 
+const createImportMap: any = (version: String) => {
+  return {
+    imports: {
+      'element-plus': `https://cdn.jsdelivr.net/npm/element-plus@${version}/dist/index.full.mjs`
+    }
+  }
+}
+
 const elPlusVersion = ref(`v2.4.4`)
 
 async function setElPlusVersion(v: string) {
+  const importMap = createImportMap(v)
   elPlusVersion.value = `loading...`
-  // await store.setElPlusVersion(v)
+  console.log(store.getImportMap())
+  await store.setImportMap(importMap)
   elPlusVersion.value = `v${v}`
 }
 
