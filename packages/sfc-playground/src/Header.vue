@@ -52,7 +52,6 @@ async function setElPlusVersion(version: string) {
   const importMap = createImportMap(version)
   elPlusVersion.value = `loading...`
   await store.setImportMap(importMap)
-  console.log(previewOptions.value)
   previewOptions.value.headHTML = `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-plus@${version}/dist/index.css">`
   elPlusVersion.value = `v${version}`
 }
